@@ -9,7 +9,7 @@ BASE_SIZE = 1024
 IMAGE_SIZE = 640
 CROP_MODE = True
 MIN_CROPS= 2
-MAX_CROPS= 6 # max:9; If your GPU memory is small, it is recommended to set it to 6.
+MAX_CROPS= 8 # max:9; If your GPU memory is small, it is recommended to set it to 6.
 MAX_CONCURRENCY = 100 # If you have limited GPU memory, lower the concurrency count.
 NUM_WORKERS = 64 # image pre-process (resize/padding) workers 
 PRINT_NUM_VIS_TOKENS = False
@@ -24,8 +24,9 @@ MODEL_PATH = 'deepseek-ai/DeepSeek-OCR' # change to your model path
 INPUT_PATH = '' 
 OUTPUT_PATH = ''
 
-PROMPT = '<image>\n<|grounding|>Convert the document to markdown.'
+PROMPT = '<image>\n<|grounding|>Extract all form fields with their labels, types, and positions. Identify input areas, checkboxes, and text fields.'
 # PROMPT = '<image>\nFree OCR.'
+# Original markdown prompt: '<image>\n<|grounding|>Convert the document to markdown.'
 # TODO commonly used prompts
 # document: <image>\n<|grounding|>Convert the document to markdown.
 # other image: <image>\n<|grounding|>OCR this image.

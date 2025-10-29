@@ -1,2 +1,5 @@
-vllm-0.8.5+cu118-cp38-abi3-manylinux1_x86_64.whl
+vllm-0.8.5+cu118-cp38-abi3-manylinux1_x86_64.whl*
 __pycache__/
+venv
+.env
+.conda/
