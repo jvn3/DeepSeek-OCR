@@ -24,7 +24,13 @@ MODEL_PATH = 'deepseek-ai/DeepSeek-OCR' # change to your model path
 INPUT_PATH = '' 
 OUTPUT_PATH = ''
 
-PROMPT = '<image>\n<|grounding|>Extract all form fields with their labels, types, and positions. Identify input areas, checkboxes, and text fields.'
+PROMPT = (
+	"<image>\n"
+	"<|grounding|>Extract all form fields with their labels, types, and positions. "
+	"Identify input areas, checkboxes, and text fields. "
+	"Ensure the JSON includes the official form title and formId keys with concrete values, "
+	"deriving them from document headers or identifiers when necessary."
+)
 # PROMPT = '<image>\nFree OCR.'
 # Original markdown prompt: '<image>\n<|grounding|>Convert the document to markdown.'
 # TODO commonly used prompts

@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  ocr-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: deepseek-ocr-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Service configuration
+      - HOST=0.0.0.0
+      - PORT=8000
+      - LOG_LEVEL=INFO
+      
+      # Model configuration
+      - MODEL_PATH=deepseek-ai/DeepSeek-OCR
+      - USE_MOCK_ADAPTER=false
+      - DEVICE=cuda
+      - GPU_MEMORY_UTILIZATION=0.9
+      
+      # Security (set these via .env file in production)
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_JWT_SECRET=${SUPABASE_JWT_SECRET}
+      - REQUIRE_E2EE=false
+      - USE_JWKS=true
+      
+      # Limits
+      - MAX_PAGE_MEGAPIXELS=25
+      - MAX_PAGES=100
+      - MAX_FILE_SIZE_MB=20
+      
+      # Features
+      - ENABLE_SSE=true
+      - ALLOW_PDF_UPLOADS=false
+      
+      # Rate limiting
+      - MAX_REQUESTS_PER_MINUTE=60
+      - MAX_REQUESTS_PER_MINUTE_PER_IP=100
+      
+      # Queue
+      - MAX_CONCURRENCY=10
+      
+      # CORS
+      - CORS_ORIGINS=*
+    
+    volumes:
+      # Mount model cache (optional, for faster restarts)
+      - model-cache:/root/.cache/huggingface
+      
+      # Mount source for development (comment out for production)
+      # - ./src:/app/src
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+  
+  # Optional: Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ocr-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
+  
+  # Optional: Grafana for metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ocr-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+
+volumes:
+  model-cache:
+  prometheus-data:
+  grafana-data:

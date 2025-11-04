@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "passport@v2025",
+  "title": "Passport Information",
+  "description": "Generic passport data extraction schema",
+  "version": "2025",
+  "fields": [
+    {
+      "id": "document_type",
+      "label": "Document Type",
+      "type": "text",
+      "required": true,
+      "aliases": ["type", "doc_type"]
+    },
+    {
+      "id": "document_number",
+      "label": "Passport Number",
+      "type": "text",
+      "required": true,
+      "aliases": ["passport_number", "passport_no", "number"]
+    },
+    {
+      "id": "surname",
+      "label": "Surname",
+      "type": "text",
+      "required": true,
+      "aliases": ["last_name", "family_name"]
+    },
+    {
+      "id": "given_names",
+      "label": "Given Names",
+      "type": "text",
+      "required": true,
+      "aliases": ["first_name", "forename"]
+    },
+    {
+      "id": "nationality",
+      "label": "Nationality",
+      "type": "country",
+      "required": true,
+      "aliases": ["citizenship"]
+    },
+    {
+      "id": "date_of_birth",
+      "label": "Date of Birth",
+      "type": "date",
+      "required": true,
+      "aliases": ["dob", "birth_date"],
+      "format": "YYYY-MM-DD"
+    },
+    {
+      "id": "sex",
+      "label": "Sex",
+      "type": "select",
+      "required": true,
+      "options": ["M", "F", "X"],
+      "aliases": ["gender"]
+    },
+    {
+      "id": "place_of_birth",
+      "label": "Place of Birth",
+      "type": "text",
+      "required": false,
+      "aliases": ["birth_place"]
+    },
+    {
+      "id": "date_of_issue",
+      "label": "Date of Issue",
+      "type": "date",
+      "required": true,
+      "aliases": ["issue_date", "issued"]
+    },
+    {
+      "id": "date_of_expiry",
+      "label": "Date of Expiry",
+      "type": "date",
+      "required": true,
+      "aliases": ["expiry_date", "expiration_date", "valid_until"]
+    },
+    {
+      "id": "issuing_authority",
+      "label": "Issuing Authority",
+      "type": "text",
+      "required": false,
+      "aliases": ["authority", "issued_by"]
+    }
+  ],
+  "metadata": {
+    "source": "ICAO Doc 9303",
+    "standard": "Machine Readable Travel Documents",
+    "lastUpdated": "2025-01-01"
+  }
+}

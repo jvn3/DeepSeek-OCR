@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "w-2@v2024",
+  "title": "IRS Form W-2: Wage and Tax Statement",
+  "description": "U.S. tax form for employee wages and taxes withheld",
+  "version": "2024",
+  "fields": [
+    {
+      "id": "employee_ssn",
+      "label": "Employee's Social Security Number",
+      "type": "text",
+      "required": true,
+      "aliases": ["ssn", "social_security_number"],
+      "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+    },
+    {
+      "id": "employer_ein",
+      "label": "Employer Identification Number (EIN)",
+      "type": "text",
+      "required": true,
+      "aliases": ["ein", "employer_id"],
+      "pattern": "^\\d{2}-\\d{7}$"
+    },
+    {
+      "id": "employer_name",
+      "label": "Employer's Name",
+      "type": "text",
+      "required": true,
+      "aliases": ["company_name", "employer"]
+    },
+    {
+      "id": "employer_address",
+      "label": "Employer's Address",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "employee_name",
+      "label": "Employee's Name",
+      "type": "text",
+      "required": true,
+      "aliases": ["name", "full_name"]
+    },
+    {
+      "id": "employee_address",
+      "label": "Employee's Address",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "box_1_wages",
+      "label": "Box 1: Wages, Tips, Other Compensation",
+      "type": "money",
+      "required": true,
+      "aliases": ["wages", "total_wages"]
+    },
+    {
+      "id": "box_2_federal_tax",
+      "label": "Box 2: Federal Income Tax Withheld",
+      "type": "money",
+      "required": true,
+      "aliases": ["federal_tax_withheld", "federal_withholding"]
+    },
+    {
+      "id": "box_3_ss_wages",
+      "label": "Box 3: Social Security Wages",
+      "type": "money",
+      "required": true,
+      "aliases": ["ss_wages", "social_security_wages"]
+    },
+    {
+      "id": "box_4_ss_tax",
+      "label": "Box 4: Social Security Tax Withheld",
+      "type": "money",
+      "required": true,
+      "aliases": ["ss_tax", "social_security_tax"]
+    },
+    {
+      "id": "box_5_medicare_wages",
+      "label": "Box 5: Medicare Wages and Tips",
+      "type": "money",
+      "required": true,
+      "aliases": ["medicare_wages"]
+    },
+    {
+      "id": "box_6_medicare_tax",
+      "label": "Box 6: Medicare Tax Withheld",
+      "type": "money",
+      "required": true,
+      "aliases": ["medicare_tax"]
+    },
+    {
+      "id": "box_15_state",
+      "label": "Box 15: State",
+      "type": "text",
+      "required": false,
+      "aliases": ["state"]
+    },
+    {
+      "id": "box_16_state_wages",
+      "label": "Box 16: State Wages, Tips, etc.",
+      "type": "money",
+      "required": false,
+      "aliases": ["state_wages"]
+    },
+    {
+      "id": "box_17_state_tax",
+      "label": "Box 17: State Income Tax",
+      "type": "money",
+      "required": false,
+      "aliases": ["state_tax"]
+    }
+  ],
+  "metadata": {
+    "source": "IRS",
+    "url": "https://www.irs.gov/forms-pubs/about-form-w-2",
+    "taxYear": 2024,
+    "lastUpdated": "2024-12-01"
+  }
+}

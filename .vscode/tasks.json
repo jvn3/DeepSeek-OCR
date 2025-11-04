@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "deepseek-ocr-api",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "TMUX= tmux new-session -A -s deepseek_api '${workspaceFolder}/scripts/run_api_server.sh'"
+      ],
+      "isBackground": false,
+      "problemMatcher": []
+    }
+  ]
+}

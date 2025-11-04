@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ds-160@v2025-10",
+  "title": "DS-160: Online Nonimmigrant Visa Application",
+  "description": "U.S. Department of State visa application form",
+  "version": "2025-10",
+  "fields": [
+    {
+      "id": "surname",
+      "label": "Surname / Family Name",
+      "type": "text",
+      "required": true,
+      "aliases": ["last_name", "family_name", "surname"],
+      "pattern": "^[A-Z\\s-]+$"
+    },
+    {
+      "id": "given_name",
+      "label": "Given Names",
+      "type": "text",
+      "required": true,
+      "aliases": ["first_name", "given_names", "forename"]
+    },
+    {
+      "id": "full_name",
+      "label": "Full Name",
+      "type": "text",
+      "required": false,
+      "aliases": ["name", "complete_name"]
+    },
+    {
+      "id": "date_of_birth",
+      "label": "Date of Birth",
+      "type": "date",
+      "required": true,
+      "aliases": ["dob", "birth_date", "birthdate"],
+      "format": "YYYY-MM-DD"
+    },
+    {
+      "id": "place_of_birth",
+      "label": "Place of Birth",
+      "type": "text",
+      "required": true,
+      "aliases": ["birth_place", "birthplace"]
+    },
+    {
+      "id": "country_of_birth",
+      "label": "Country of Birth",
+      "type": "country",
+      "required": true,
+      "aliases": ["birth_country"]
+    },
+    {
+      "id": "nationality",
+      "label": "Country of Citizenship / Nationality",
+      "type": "country",
+      "required": true,
+      "aliases": ["citizenship", "country_of_citizenship"]
+    },
+    {
+      "id": "passport_number",
+      "label": "Passport Number",
+      "type": "text",
+      "required": true,
+      "aliases": ["passport_no", "passport_num", "document_number"]
+    },
+    {
+      "id": "passport_issue_date",
+      "label": "Passport Issue Date",
+      "type": "date",
+      "required": true,
+      "aliases": ["issue_date", "date_of_issue"]
+    },
+    {
+      "id": "passport_expiry_date",
+      "label": "Passport Expiration Date",
+      "type": "date",
+      "required": true,
+      "aliases": ["expiry_date", "expiration_date", "date_of_expiry"]
+    },
+    {
+      "id": "sex",
+      "label": "Sex",
+      "type": "select",
+      "required": true,
+      "options": ["Male", "Female"],
+      "aliases": ["gender"]
+    },
+    {
+      "id": "marital_status",
+      "label": "Marital Status",
+      "type": "select",
+      "required": true,
+      "options": ["Single", "Married", "Divorced", "Widowed", "Separated", "Common Law Marriage"]
+    },
+    {
+      "id": "email",
+      "label": "Email Address",
+      "type": "email",
+      "required": true,
+      "aliases": ["email_address", "e-mail"]
+    },
+    {
+      "id": "phone",
+      "label": "Primary Phone Number",
+      "type": "phone",
+      "required": true,
+      "aliases": ["phone_number", "telephone", "mobile"]
+    },
+    {
+      "id": "address",
+      "label": "Home Address",
+      "type": "text",
+      "required": true,
+      "aliases": ["street_address", "residential_address"]
+    },
+    {
+      "id": "city",
+      "label": "City",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "state_province",
+      "label": "State / Province",
+      "type": "text",
+      "required": false,
+      "aliases": ["state", "province"]
+    },
+    {
+      "id": "postal_code",
+      "label": "ZIP / Postal Code",
+      "type": "text",
+      "required": false,
+      "aliases": ["zip_code", "zip", "postcode"]
+    },
+    {
+      "id": "country",
+      "label": "Country",
+      "type": "country",
+      "required": true,
+      "aliases": ["country_of_residence"]
+    },
+    {
+      "id": "travel_purpose",
+      "label": "Purpose of Trip",
+      "type": "select",
+      "required": true,
+      "options": ["Tourism", "Business", "Student", "Work", "Transit", "Medical", "Other"]
+    }
+  ],
+  "metadata": {
+    "source": "U.S. Department of State",
+    "url": "https://ceac.state.gov/genniv/",
+    "lastUpdated": "2025-10-01"
+  }
+}
