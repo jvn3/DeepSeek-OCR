@@ -2,14 +2,159 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "deepseek-ocr-api",
+      "label": "Setup Conda Environment",
       "type": "shell",
       "command": "bash",
       "args": [
-        "-lc",
-        "TMUX= tmux new-session -A -s deepseek_api '${workspaceFolder}/scripts/run_api_server.sh'"
+        "-c",
+        "if [ ! -d '${workspaceFolder}/venv' ]; then conda create -p ${workspaceFolder}/venv python=3.12 -y; fi && echo 'Conda environment ready at ${workspaceFolder}/venv'"
       ],
-      "isBackground": false,
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Backend Dependencies",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "source ${workspaceFolder}/venv/bin/activate && cd ${workspaceFolder}/app && pip install -r requirements.txt"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "dependsOn": [
+        "Setup Conda Environment"
+      ]
+    },
+    {
+      "label": "Install Frontend Dependencies",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/ocr-studio && npm install",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install All Dependencies",
+      "dependsOn": [
+        "Install Backend Dependencies",
+        "Install Frontend Dependencies"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Backend Server",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "source ${workspaceFolder}/venv/bin/activate && cd ${workspaceFolder}/app && python ocr_server.py"
+      ],
+      "isBackground": true,
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "line": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Starting.*",
+          "endsPattern": ".*Application startup complete.*"
+        }
+      }
+    },
+    {
+      "label": "Run Frontend Dev Server",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/ocr-studio && npm run dev",
+      "isBackground": true,
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "line": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*starting.*",
+          "endsPattern": ".*ready.*|.*compiled.*"
+        }
+      }
+    },
+    {
+      "label": "Run Full Stack (Backend + Frontend)",
+      "dependsOn": [
+        "Run Backend Server",
+        "Run Frontend Dev Server"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Frontend for Production",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/ocr-studio && npm run build",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Kill Backend Server",
+      "type": "shell",
+      "command": "pkill -9 -f 'ocr_server.py' || true",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Kill All Servers",
+      "type": "shell",
+      "command": "pkill -9 -f 'ocr_server.py' || true; pkill -9 -f 'next-server' || true",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
       "problemMatcher": []
     }
   ]

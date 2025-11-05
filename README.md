@@ -56,9 +56,76 @@
 - [2025/10/20]🚀🚀🚀 We release DeepSeek-OCR, a model to investigate the role of vision encoders from an LLM-centric viewpoint.
 
 ## Contents
+- [Project Structure](#project-structure)
+- [Quick Start with VS Code Tasks](#quick-start-with-vs-code-tasks)
 - [Install](#install)
 - [vLLM Inference](#vllm-inference)
 - [Transformers Inference](#transformers-inference)
+
+## Project Structure
+
+```
+DeepSeek-OCR/
+├── app/                              # Backend application
+│   ├── ocr_server.py                # FastAPI OCR server
+│   ├── simple_server.py             # Mock server for testing
+│   ├── requirements.txt             # Python dependencies
+│   ├── scripts/                     # Backend utility scripts
+│   ├── DeepSeek-OCR-master/        # DeepSeek OCR model files
+│   └── vllm-*.whl                  # vLLM wheel file
+├── ocr-studio/                      # Next.js frontend application
+│   ├── app/                        # Next.js 15 app router
+│   ├── components/                 # React components
+│   ├── lib/                        # Utilities and API client
+│   └── public/                     # Static assets
+├── venv/                           # Python virtual environment
+├── .vscode/                        # VS Code configuration
+│   └── tasks.json                  # Automated tasks
+└── README.md
+```
+
+## Quick Start with VS Code Tasks
+
+This project includes VS Code tasks for easy development. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) and type "Tasks: Run Task" to see all available tasks:
+
+### Available Tasks
+
+1. **Install All Dependencies** - Install both backend and frontend dependencies
+2. **Install Backend Dependencies** - Install Python packages for the OCR backend
+3. **Install Frontend Dependencies** - Install npm packages for the Next.js frontend
+4. **Run Full Stack (Backend + Frontend)** ⭐ - Run both servers simultaneously (default build task)
+5. **Run Backend Server** - Start the OCR backend server (port 8000)
+6. **Run Frontend Dev Server** - Start the Next.js dev server (port 3000)
+7. **Build Frontend for Production** - Build optimized frontend bundle
+8. **Kill Backend Server** - Stop the OCR backend
+9. **Kill All Servers** - Stop all running servers
+
+### Running the Full Stack
+
+**Option 1: Using VS Code Tasks (Recommended)**
+```
+1. Press Ctrl+Shift+B (or Cmd+Shift+B on Mac) - runs "Run Full Stack" by default
+2. Or press Ctrl+Shift+P → "Tasks: Run Task" → "Run Full Stack (Backend + Frontend)"
+3. Access the application at http://localhost:3000
+4. Backend API available at http://localhost:8000
+
+Note: First time will auto-create conda environment at workspace/venv
+```
+
+**Option 2: Manual Start**
+
+Backend:
+```bash
+conda activate ./venv
+cd app
+python ocr_server.py
+```
+
+Frontend:
+```bash
+cd ocr-studio
+npm run dev
+```
   
 
 
@@ -89,9 +156,9 @@ pip install flash-attn==2.7.3 --no-build-isolation
 
 ## vLLM-Inference
 - VLLM:
->**Note:** change the INPUT_PATH/OUTPUT_PATH and other settings in the DeepSeek-OCR-master/DeepSeek-OCR-vllm/config.py
+>**Note:** change the INPUT_PATH/OUTPUT_PATH and other settings in the app/DeepSeek-OCR-master/DeepSeek-OCR-vllm/config.py
 ```Shell
-cd DeepSeek-OCR-master/DeepSeek-OCR-vllm
+cd app/DeepSeek-OCR-master/DeepSeek-OCR-vllm
 ```
 1. image: streaming output
 ```Shell
@@ -184,7 +251,7 @@ res = model.infer(tokenizer, prompt=prompt, image_file=image_file, output_path =
 ```
 or you can
 ```Shell
-cd DeepSeek-OCR-master/DeepSeek-OCR-hf
+cd app/DeepSeek-OCR-master/DeepSeek-OCR-hf
 python run_dpsk_ocr.py
 ```
 ## Support-Modes

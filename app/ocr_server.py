@@ -8,7 +8,7 @@ import re
 import io
 from typing import Optional, Dict, Any
 
-sys.path.insert(0, '/data/DeepSeek-OCR/DeepSeek-OCR-master/DeepSeek-OCR-vllm')
+sys.path.insert(0, '/data/DeepSeek-OCR/app/DeepSeek-OCR-master/DeepSeek-OCR-vllm')
 
 import torch
 if torch.version.cuda == '11.8':

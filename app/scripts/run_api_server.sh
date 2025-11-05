@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="${SCRIPT_DIR}/.."
+PROJECT_ROOT="${SCRIPT_DIR}/../.."
 VENV_PATH="${PROJECT_ROOT}/venv"
 
 if [[ -d "${VENV_PATH}" && -f "${VENV_PATH}/bin/activate" ]]; then
@@ -17,5 +17,5 @@ else
     exit 1
 fi
 
-cd "${PROJECT_ROOT}/DeepSeek-OCR-master/DeepSeek-OCR-vllm"
+cd "${PROJECT_ROOT}/app/DeepSeek-OCR-master/DeepSeek-OCR-vllm"
 exec uvicorn api_server:app --host 0.0.0.0 --port 8080
